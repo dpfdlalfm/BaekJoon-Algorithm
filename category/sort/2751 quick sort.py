@@ -11,9 +11,11 @@ def quick_sort(arr, start, end):
     left = start + 1
     right = end
     while left <= right:
-        while arr[left] <= arr[pivot] and left <= end:
+        while left <= end and arr[left] <= arr[pivot]:
+            # 조건문 순서가 바뀌면 코딩이 안된다..?
+            # arr[left]가 마지막에 인덱싱 초과해버리기 떄문.
             left += 1
-        while arr[right] >= arr[pivot] and right > start:
+        while right > start and arr[right] >= arr[pivot]:
             right -= 1
         if left > right:
             arr[pivot], arr[right] = arr[right], arr[pivot]
