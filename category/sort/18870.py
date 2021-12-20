@@ -26,3 +26,6 @@ n = int(input())
 num_restrict(n,1,1000000)
 x_lst = [[x,x] for x in list(map(int,sys.stdin.readline().split()))]
 compress(x_lst)
+# https://www.acmicpc.net/board/view/79811#comment-130244
+# x_lst와 lst의 주소값이 동일하므로 lst의 특정 값을 바꾸면
+# x_lst의 특정 값도 같이 바뀐다.
