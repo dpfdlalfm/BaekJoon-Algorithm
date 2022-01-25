@@ -12,16 +12,14 @@ def num_restrict(x,a,b):
 # 17142번 연구소3
 # 시간제한 1초
 n,m = map(int,sys.stdin.readline().split())
-num_restrict(n,4,50)
-num_restrict(m,1,10)
+num_restrict(n,4,50)    # 4 <= n <= 50
+num_restrict(m,1,10)    # 1 <= m <= 10
 maze = []
 viruses = []
 for i in range(n):
     arr = list(sys.stdin.readline().split())
     for j in range(n):
-        if arr[j] == '2':
-            arr[j] = 0
-            viruses.append([i,j])
+        if arr[j] == '2': viruses.append([i,j])
     maze.append(arr)
 
 queue = deque()
@@ -34,8 +32,12 @@ for combis in combinations(viruses,m):
     miro = copy.deepcopy(maze)
     visited = [[False] * n for _ in range(n)]
     for combi in combis:
-        visited[combi[0]][combi[1]] = True
+        a = combi[0] 
+        b = combi[1]
+        miro[a][b] = 0
+        visited[a][b] = True
         queue.append(combi)
+    # print(combis)
     while queue:
         x,y = queue.popleft()
         for i in range(4):
@@ -47,17 +49,15 @@ for combis in combinations(viruses,m):
                         miro[dx][dy] = miro[x][y]+1
                         k = max(k,miro[dx][dy])
                         visited[dx][dy] = True
-                        queue.append([dx,dy])
-                        
+                        queue.append([dx,dy])                
+    for combi in combis:
+        miro[combi[0]][combi[1]] = '*'
     for m in miro:
-        if '0' in m:
-            stopper = 1
-    if stopper == 0:
-        print(result,k)
+        if '0' in m: stopper = 1
+    print(stopper, k)
+    if stopper == 0 and k>0:
         result = min(result,k)
 
-
-if result != float('inf'): 
-    print(result)
-else:
-    print(-1)
+print(result)
+if result != float('inf'): print(result)
+else: print(-1)
