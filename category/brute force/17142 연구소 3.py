@@ -45,19 +45,18 @@ for combis in combinations(viruses,m):
             dy = y + move_y[i]
             if 0<=dx<n and 0<=dy<n:
                 if not visited[dx][dy]:
-                    if maze[dx][dy] == '0' or maze[dx][dy] == 0:
+                    if maze[dx][dy] != '1':
                         miro[dx][dy] = miro[x][y]+1
-                        k = max(k,miro[dx][dy])
+                        if maze[dx][dy] == '2': pass
+                        else: k = max(k,miro[dx][dy])
                         visited[dx][dy] = True
-                        queue.append([dx,dy])                
+                        queue.append([dx,dy])             
     for combi in combis:
         miro[combi[0]][combi[1]] = '*'
     for m in miro:
         if '0' in m: stopper = 1
-    print(stopper, k)
-    if stopper == 0 and k>0:
+    if stopper == 0 and k>=0:
         result = min(result,k)
 
-print(result)
 if result != float('inf'): print(result)
 else: print(-1)
