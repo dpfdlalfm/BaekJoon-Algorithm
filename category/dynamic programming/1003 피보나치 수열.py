@@ -10,10 +10,11 @@ def num_restrict(x,a,b):
 # 1003번 피보나치 함수
 # 다이나믹 프로그래밍
 # 시간제한 0.25초
+# 보텀업 방식 사용.
 
 t = int(input())
 d = [[0,0] for _ in range(41)]
-d[0][0] = 1
+d[0][0] = z
 d[1][1] = 1
 
 for i in range(2,41):
